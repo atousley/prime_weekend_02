@@ -22,10 +22,32 @@ function getData(){
                 $el.append('<p>' + person.favoriteMovie1 + '</p>');
                 $el.append('<p>' + person.favoriteMovie2 + '</p>');
                 $el.append('<p>' + person.favoriteSong + '</p>');
+                $el.addClass('hidden');
 
-                $('.currentPerson').append('<button id="selectedPerson" class="'+ personNum +'" > ' + personNum + ' </button>');
+                $('.currentPerson').append('<button class="selectedPerson"> ' + personNum + ' </button>');
                 $('.currentPerson').children().last().data('id', i);
                 personNum++;
+
+            });
+
+            $('.currentPerson').on('click', '.selectedPerson', function() {
+                $(this).each(function(i) {
+                    $(this).removeClass('hightlight');
+                });
+
+                $(this).addClass('highlight');
+
+
+                $('.person').each(function() {
+                    $(this).removeClass('selected');
+                    $(this).hide();
+                    if ($(this).data('index') == $('.selectedButton').data('index')) {
+                        $(this).fadeIn(750);
+                        $(this).addClass('selected');
+                    }
+
+                });
+
             });
 
             function selectPerson() {

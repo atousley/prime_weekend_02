@@ -12,6 +12,11 @@ body {
     display: inline;
 }
 
+.selected {
+    font-style: italic;
+    display: block;
+}
+
 .highlight {
     color: magenta;
     font-style: italic;
