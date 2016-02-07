@@ -30,23 +30,22 @@ function getData(){
 
             });
 
-            $('.currentPerson').on('click', '.selectedPerson', function() {
-                $(this).each(function(i) {
-                    $(this).removeClass('hightlight');
+            $('.container').on('click', '.selectedPerson', function() {
+                $('.selectedPerson').each(function(i) {
+                    $(this).removeClass('highlight');
                 });
 
                 $(this).addClass('highlight');
 
 
-                $('.person').each(function() {
-                    $(this).removeClass('selected');
-                    $(this).hide();
-                    if ($(this).data('index') == $('.selectedButton').data('index')) {
-                        $(this).fadeIn(750);
-                        $(this).addClass('selected');
-                    }
-
-                });
+                //$('.person').each(function() {
+                //    $(this).removeClass('selected');
+                //    $(this).hide();
+                //    if ($(this).data('index') == $('.selectedButton').data('index')) {
+                //        $(this).fadeIn(750);
+                //        $(this).addClass('selected');
+                //    }
+                //});
 
             });
 
