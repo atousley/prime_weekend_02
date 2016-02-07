@@ -38,29 +38,16 @@ function getData(){
                 $(this).addClass('highlight');
 
 
-                //$('.person').each(function() {
-                //    $(this).removeClass('selected');
-                //    $(this).hide();
-                //    if ($(this).data('index') == $('.selectedButton').data('index')) {
-                //        $(this).fadeIn(750);
-                //        $(this).addClass('selected');
-                //    }
-                //});
-
-            });
-
-            function selectPerson() {
-                $('#selectedPerson').each(function (i) {
-
-                    var id = $('#selectedPerson').children().first();
-
-                    console.log(id);
-
-                    if(id == clickCounter) {
-                        console.log(clickCounter);
+                $('.person').each(function(i) {
+                    $(this).removeClass('selected');
+                    $(this).addClass('hidden');
+                    if ($(this).data('id') == $('.selectedPerson').data('id')) {
+                        $(this).removeClass(hidden);
+                        $(this).addClass('selected');
                     }
                 });
-            }
+
+            });
 
             $('.rightScroll').on('click', function() {
                 clickCounter++;
