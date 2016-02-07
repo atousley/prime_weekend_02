@@ -17,6 +17,10 @@ body {
     font-style: italic;
 }
 
+.hidden {
+    display: none;
+}
+
 /*.index-point {*/
     /*width: 25px;*/
     /*height: 25px;*/

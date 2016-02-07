@@ -1,7 +1,7 @@
 var clickCounter = -1;
 var personNum = 0;
-var i = 0;
-var toSelect = 0;
+//var i = 0;
+var person = 0;
 
 $(document).ready(function(){
     getData();
@@ -14,11 +14,19 @@ function getData(){
         success: function(data) {
             console.log(data);
 
-            for(var i = 0; i < data.people.length; i++){
+            $.each(data.people, function(i, person) {
+                $('#showcase').append('<div class="person"></div>').data('id', i);
+
+                var $el = $('#showcase').children().last();
+                $el.append('<h2>' + person.name + '</h2>');
+                $el.append('<p>' + person.favoriteMovie1 + '</p>');
+                $el.append('<p>' + person.favoriteMovie2 + '</p>');
+                $el.append('<p>' + person.favoriteSong + '</p>');
+
                 $('.currentPerson').append('<button id="selectedPerson" class="'+ personNum +'" > ' + personNum + ' </button>');
-                //$('.currentPerson').children().last().data('id', personNum);
+                $('.currentPerson').children().last().data('id', i);
                 personNum++;
-            }
+            });
 
             function selectPerson() {
                 $('#selectedPerson').each(function (i) {
@@ -59,21 +67,21 @@ function getData(){
                 return clickCounter;
             });
 
-            function showPerson(person) {
-                $('#showcase').children().last().remove();
-                $('#showcase').append('<div class="person"></div>');
-
-                var $el = $('.person');
-                $el.append('<h2>' + person.name + '</h2>');
-                $el.append('<p>' + person.favoriteMovie1 + '</p>');
-                $el.append('<p>' + person.favoriteMovie2 + '</p>');
-                $el.append('<p>' + person.favoriteSong + '</p>');
-
-                //currentPerson = data.people[i];
-                //console.log(currentPerson);
-
-                selectPerson();
-            };
+            //function showPerson(person) {
+            //    $('#showcase').children().last().addClass('hidden');
+            //    $('#showcase').append('<div class="person"></div>');
+            //
+            //    var $el = $('.person');
+            //    $el.append('<h2>' + person.name + '</h2>');
+            //    $el.append('<p>' + person.favoriteMovie1 + '</p>');
+            //    $el.append('<p>' + person.favoriteMovie2 + '</p>');
+            //    $el.append('<p>' + person.favoriteSong + '</p>');
+            //
+            //
+            //    //console.log(currentPerson);
+            //
+            //    selectPerson();
+            //};
         },
         error: function() {
             console.log('ERROR: Unable to contact the server.');
