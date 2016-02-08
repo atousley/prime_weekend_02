@@ -1,9 +1,12 @@
 var clickCounter = -1;
-var personNum = 0;
+var peopleArray = [];
 
 
 $(document).ready(function(){
     getData();
+    $('.rightScroll').on('click', rightScroll);
+    $('.leftScroll').on('click', leftScroll);
+    $('.currentPerson').on('click', '.selectedPerson', updateIndex);
 });
 
 function getData(){
@@ -11,63 +14,35 @@ function getData(){
         type: "GET",
         url:"/data",
         success: function(data) {
-            console.log(data);
-
-            $.each(data.people, function(i, person) {
-                $('.currentPerson').append('<button class="selectedPerson"> ' + personNum + ' </button>');
-                $('.currentPerson').children().last().data('id', i);
-                personNum++;
-            });
-
-            $('.currentPerson').on('click', '.selectedPerson', function() {
-                $('.selectedPerson').each(function(i) {
-                    $(this).removeClass('highlight');
-                });
-
-                $(this).addClass('highlight');
-                var selectedButton = $(this);
-
-                clickCounter = selectedButton.data('id');
-                i = clickCounter;
-
-                showPerson(data.people[i]);
-            });
-
-            $('.rightScroll').on('click', function() {
-                clickCounter++;
-
-                if(clickCounter == data.people.length){
-                    clickCounter = 0;
-                }
-
-                i = clickCounter;
-                console.log(i);
-                console.log(data.people[i]);
-
-                showPerson(data.people[i]);
-                highlightButton();
-            });
-
-            $('.leftScroll').on('click', function() {
-                clickCounter--;
-
-                if(clickCounter < 0) {
-                    clickCounter = data.people.length -1;
-                }
-
-                i = clickCounter;
-
-                showPerson(data.people[i]);
-                console.log(data.people[i]);
-                highlightButton();
-            });
-
+            peopleArray = data.people;
+            addIndexButtons();
         },
         error: function() {
             console.log('ERROR: Unable to contact the server.');
         }
 
     });
+}
+
+function addIndexButtons() {
+    peopleArray.forEach(function(person, i) {
+        $('.currentPerson').append('<button class="selectedPerson"> ' + i + ' </button>');
+        $('.currentPerson').children().last().data('id', i);
+    });
+}
+
+function updateIndex() {
+    $('.selectedPerson').each(function(i) {
+        $(this).removeClass('highlight');
+    });
+
+    $(this).addClass('highlight');
+    var selectedButton = $(this);
+
+    clickCounter = selectedButton.data('id');
+    i = clickCounter;
+
+    showPerson(peopleArray[i]);
 }
 
 function showPerson(person) {
@@ -80,6 +55,32 @@ function showPerson(person) {
     $el.append('<p>Favorite Movie: ' + person.favoriteMovie1 + '</p>');
     $el.append('<p>Second Favorite Movie: ' + person.favoriteMovie2 + '</p>');
     $el.append('<p>Favorite Song: ' + person.favoriteSong + '</p>');
+}
+
+function rightScroll() {
+    clickCounter++;
+
+    if(clickCounter == peopleArray.length){
+        clickCounter = 0;
+    }
+
+    i = clickCounter;
+
+    showPerson(peopleArray[i]);
+    highlightButton();
+}
+
+function leftScroll() {
+    clickCounter--;
+
+    if(clickCounter < 0) {
+        clickCounter = peopleArray.length -1;
+    }
+
+    i = clickCounter;
+
+    showPerson(peopleArray[i]);
+    highlightButton();
 }
 
 function highlightButton() {
