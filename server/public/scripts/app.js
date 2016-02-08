@@ -35,24 +35,30 @@ function getData(){
 
             $('.rightScroll').on('click', function() {
                 clickCounter++;
-                i = clickCounter;
 
-                if(clickCounter == data.people.length -1){
-                    clickCounter = -1;
+                if(clickCounter == data.people.length){
+                    clickCounter = 0;
                 }
+
+                i = clickCounter;
+                console.log(i);
+                console.log(data.people[i]);
+
                 showPerson(data.people[i]);
                 highlightButton();
             });
 
             $('.leftScroll').on('click', function() {
                 clickCounter--;
-                i = clickCounter;
 
                 if(clickCounter < 0) {
-                    clickCounter = data.people.length;
+                    clickCounter = data.people.length -1;
                 }
 
+                i = clickCounter;
+
                 showPerson(data.people[i]);
+                console.log(data.people[i]);
                 highlightButton();
             });
 
