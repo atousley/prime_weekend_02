@@ -1,6 +1,7 @@
 body {
     margin: 15px;
     padding: 15px;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
 .jumbotron {
@@ -8,18 +9,27 @@ body {
     padding:15px;
 }
 
-.currentPerson p {
-    display: inline;
+#peopleContent {
+    margin: 0 auto;
 }
 
-.selected {
-    font-style: italic;
-    display: block;
+#showcase {
+    height: 200px;
+}
+
+#showcase, span {
+    text-align: center;
+    padding: 15px;
+}
+
+.selectedPerson {
+    margin: 2px;
 }
 
 .highlight {
     color: magenta;
     font-style: italic;
+    font-family: Impact, Charcoal, sans-serif;
 }
 
 .hidden {

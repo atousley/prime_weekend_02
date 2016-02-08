@@ -77,6 +77,7 @@ function getData(){
             });
 
             function showPerson(person) {
+                $('#').find('span').remove();
                 $('#showcase').children().last().addClass('hidden');
                 $('#showcase').append('<div class="person"></div>');
 
